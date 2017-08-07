@@ -2,13 +2,13 @@
 
 <h1>Posts</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
+      <th>作者</th>
+      <th>標題</th>
+      <th>內容</th>
+      <th>建立在</th>
     </tr>
   </thead>
 
@@ -19,6 +19,7 @@
         <!--之後希望可以把user name 寫成可以直接連到對方的個人頁面去, 化又說回來 個人主要要面想要有什？-->
         <td><%= post.title %></td>
         <td><%= post.content %></td>
+        <td><%= post.created_at%><td>
         <td><%= link_to 'Show', post %></td>
         <% if current_user && current_user.id == post.user.id %>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>
