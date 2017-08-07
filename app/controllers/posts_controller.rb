@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
+  #順序不能反喔 跟private裡面的結構有關係 
+  before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :is_current_user?, :only => [:edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -25,8 +28,11 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-
+    #設定為user_id只能是創立者的不能自己設定
+    @post.user_id = current_user.id
+    
     respond_to do |format|
+      
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
@@ -66,7 +72,11 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
-
+    def is_current_user?      
+      if current_user.id != @post.user_id
+        redirect_to posts_path
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:user_id, :title, :content)

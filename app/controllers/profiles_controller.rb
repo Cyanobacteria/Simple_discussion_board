@@ -1,5 +1,8 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!
+  #順序不要反
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :is_current_user?, :only => [:edit, :update, :destroy]
 
   # GET /profiles
   # GET /profiles.json
@@ -25,7 +28,7 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
-
+    @profile.user_id = current_user.id
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
@@ -67,6 +70,12 @@ class ProfilesController < ApplicationController
       @profile = Profile.find(params[:id])
     end
 
+    def is_current_user?      
+      if current_user.id != @profile.user_id
+        #應該要回到該profile頁面,或許回到首頁也不錯？ 只有熟知後台的人才會使用網址搞破壞，這樣回首頁也剛剛好阿
+        redirect_to posts_path
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:user_id, :name, :age, :location, :gender)

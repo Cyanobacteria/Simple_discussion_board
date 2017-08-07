@@ -1,5 +1,7 @@
 class DiscussionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
+  before_action :is_current_user?, :only => [:edit, :update, :destroy]
 
   # GET /discussions
   # GET /discussions.json
@@ -25,7 +27,9 @@ class DiscussionsController < ApplicationController
   # POST /discussions.json
   def create
     @discussion = Discussion.new(discussion_params)
-
+    #這邊少了一些東西 上面的params設計上應該要從post而來所以它應該要有post_id傳入
+    #這個部份未解決需要補齊
+    @discussion.user_id = current_user.id
     respond_to do |format|
       if @discussion.save
         format.html { redirect_to @discussion, notice: 'Discussion was successfully created.' }
@@ -67,6 +71,12 @@ class DiscussionsController < ApplicationController
       @discussion = Discussion.find(params[:id])
     end
 
+    def is_current_user?      
+      if current_user.id != @discussion.user_id
+         #這個還要修改 應該是如果編輯的不是自己的評論 倒回該post所在頁
+         redirect_to posts_path
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def discussion_params
       params.require(:discussion).permit(:post_id, :user_id, :content)
