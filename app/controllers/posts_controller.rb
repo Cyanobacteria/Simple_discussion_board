@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :is_current_user?, :only => [:edit, :update, :destroy]
+  before_action :find_discussions_belongs_to_post, :only => [:show]
 
   # GET /posts
   # GET /posts.json
@@ -13,6 +14,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+   
   end
 
   # GET /posts/new
@@ -72,11 +74,27 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
+    
+    def find_discussions_belongs_to_post    
+      
+     a = @discussions = @post.discussions.all 
+     a.each do |aa|
+       #aa.each do |bb|
+        puts "黑嘿嘿" 
+        puts aa
+       #end 
+     end
+      #要寫一個面對空值時候的判斷
+#     puts @discussions[0].content
+ #    puts "dffadsf"
+    end
+
     def is_current_user?      
       if current_user.id != @post.user_id
         redirect_to posts_path
       end
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:user_id, :title, :content)
