@@ -15,12 +15,15 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.user_id %></td>
+        <td><%= post.user.profile.name %></td>
+        <!--之後希望可以把user name 寫成可以直接連到對方的個人頁面去, 化又說回來 個人主要要面想要有什？-->
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user && current_user.id == post.user.id %>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
