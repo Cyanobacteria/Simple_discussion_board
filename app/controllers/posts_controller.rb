@@ -9,12 +9,17 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    if current_user.profile == nil
+      user = current_user
+      Profile.create(:user_id => user.id, :name => user.email, :age => nil, :location => nil, :gender => nil)
+    end
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
-   
+    #用來在post的show頁面直接新增discussion
+    @discussion = Discussion.new 
   end
 
   # GET /posts/new
