@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.each.reverse_each
     if current_user.profile == nil
       user = current_user
       Profile.create(:user_id => user.id, :name => user.email, :age => nil, :location => nil, :gender => nil)
