@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :profiles
   
   resources :posts do
-    resources :discussions
+    resources :discussions, :except => [:index, :new ]
   end
   root 'posts#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
