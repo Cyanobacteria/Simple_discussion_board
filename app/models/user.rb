@@ -4,10 +4,12 @@ class User < ApplicationRecord
 #=begin
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
+  has_many :group
   has_many :posts
   has_many :discussions
   has_one :profile
+  has_many :group_relationships
+  has_many :participated_groups, :through => :group_relationships, :source => :group
 #=end
 
 end
