@@ -4,36 +4,28 @@
 
 
 
-        <div class="row">
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
+<div class="row">
+<!-- Blog Post Content Column -->
+  <div class="col-lg-8">
                 <!-- Blog Post -->
                 <!-- Title -->
-                <h1><%= @post.title %></h1>
+    <h1><%= @post.title %></h1>
                 <!-- Author -->
-                <p class="lead">
-                    by <a href="#"><%= @post.user.profile.name %></a>
-                    <% if current_user && current_user == @post.user%>
-    <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-default pull-right" %>
-    <% end %>
-    <%= link_to 'Back', posts_path, class: "btn btn-default pull-right" %>
-                </p>
+    <p class="lead">
+      by <a href="#"><%= @post.user.profile.name %></a>
+      <% if current_user && current_user == @post.user%>
+        <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-default pull-right" %>
+      <% end %>
+        <%= link_to 'Back', posts_path, class: "btn btn-default pull-right" %>
+    </p>
+    <hr>
 
-                <hr>
-
-                <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span><%= @post.created_at %></p>
-
-                <!-- Preview Image
-                <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                -->
-                <hr> 
-
-                <!-- Post Content -->
-                <p><%= @post.content %></p>
-
-                <hr>
+    <!-- Date/Time -->
+    <p><span class="glyphicon glyphicon-time"></span><%= @post.created_at %></p>
+    <hr> 
+    <!-- Post Content -->
+    <p><%= @post.content %></p>
+    <hr>
 
 
 
@@ -56,27 +48,26 @@
 
 
 
-
- <div class="well">
-                    <h4>Leave a Comment:</h4>
+<!--發布discuss的輸入框-->
+<div class="well">
+  <h4>Leave a Comment:</h4>
   <%= simple_form_for [@post,@discussion], :url => post_discussions_path(@post) do |f| %>
-                    <!--  post_discussions_path(@post)  略懂略懂 還是不是很明白但是大概會操作
-                          必須在helper跟form多下功夫                                                                 -->
-                    <form role="form">
-                        <div class="form-group">
-                            <%= f.text_area :content, :class => "form-control", :rows => "3" %>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                    <% end %>
-                </div>
-
-                <hr>
-
+   <!--  post_discussions_path(@post)  略懂略懂 還是不是很明白但是大概會操作
+         必須在helper跟form多下功夫  -->
+    <form role="form">
+      <div class="form-group">
+        <%= f.text_area :content, :class => "form-control", :rows => "3" %>
+      </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  <% end %>
+</div>
+<hr>
 
 
 
- <%= link_to("Write a comment", new_post_discussion_path(@post), class: "btn btn-default pull-right")%>
+
+ <%#link_to("Write a comment", new_post_discussion_path(@post), class: "btn btn-default pull-right")%>
 <!--
 
 <div class="panel panel-default">
@@ -98,24 +89,31 @@
 </div>
 -->
 
-
-    <% @discussions.each do |discussion| %>
-<div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" src="http://placehold.it/64x64" alt="">
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading"><%= discussion.user.profile.name %>
-      <small><%= discussion.created_at %></small>
-    </h4> <%= discussion.content %>
-          <% if current_user && current_user == discussion.user%>
-          <%= link_to("Edit", edit_post_discussion_path(@post, discussion), class: "btn btn-default pull-right")%>
-          <% end %>
-   </div>
-</div>
+<!--顯示所有discuss-->
+<% @discussions.each do |discussion| %>
+  <div class="media">
+    <a class="pull-left" href="#">
+      <img class="media-object" src="http://placehold.it/64x64" alt="">
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading"><%= discussion.user.profile.name %>
+        <small><%= discussion.created_at %></small>
+      </h4> 
+      <%= discussion.content %>
+      <% if current_user && current_user == discussion.user%>
+        <%= link_to("Edit", edit_post_discussion_path(@post, discussion), class: "btn btn-default pull-right")%>
+      <% end %>
+    </div>
+  </div>
   <% if discussion != @discussions.last %>
     <hr>
   <% end %>
 <% end %>
 
 
+<!-- div col-lg-8-->
+</div>
+<!-- div row -->
+</div>
+
+</div>
