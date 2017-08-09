@@ -4,10 +4,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
   <!--這邊有問題要修 -->
-     <% if current_user.profile == nil %>
-       <% user = current_user %>
-       <% Profile.create(:user_id => user.id) %>
-     <% end %>
+     <% if_user_profile_nil_do %>
      <% if current_user.profile.name != nil%>
        <a class="navbar-brand" href="#"><%= current_user.profile.name%></a>
      <% else %>

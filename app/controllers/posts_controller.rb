@@ -25,6 +25,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @group = Group.find(params[:format])
   end
 
   # GET /posts/1/edit
@@ -34,11 +35,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    @group = Group.find(params[:format])
     @post = Post.new(post_params)
     #設定為user_id只能是創立者的不能自己設定
     @post.user_id = current_user.id
-    
-    respond_to do |format|
+    @post.group_id = @group.id    
+    #respond_to do |format|
       
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -47,7 +49,7 @@ class PostsController < ApplicationController
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
-    end
+    
   end
 
   # PATCH/PUT /posts/1

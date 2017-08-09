@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+<%= @group.id%>
+<p>
+  <strong>User:</strong>
+  <%= @group.user_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @group.name %>
+</p>
+
+<p>
+  <strong>Describ:</strong>
+  <%= @group.describe %>
+</p>
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>
+
+
+
+
+
+
+<h1>Posts</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>作者</th>
+      <th>標題</th>
+      <th>內容</th>
+      <th>建立在</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.user.profile.name %></td>
+        <!--之後希望可以把user name 寫成可以直接連到對方的個人頁面去, 化又說回來 個人主要要面想要有什？-->
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= post.created_at%><td>
+        <td><%= link_to 'Show', post %></td>
+        <% if current_user && current_user.id == post.user.id %>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path(@group.id) %>
