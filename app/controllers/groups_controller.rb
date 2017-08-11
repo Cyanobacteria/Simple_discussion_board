@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-  #before_action :set_current_user
+  before_action :set_current_user
 
   # GET /groups
   # GET /groups.json
@@ -37,8 +37,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-      user = current_user
-    @group.user_id = user.id 
+      #user = current_user
+    @group.user_id = @user.id 
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
@@ -54,6 +54,9 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1.json
   def update
     respond_to do |format|
+
+    #確定編輯後的id一定是編輯者本人
+    @group.user_id = current_user.id
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
@@ -87,11 +90,11 @@ class GroupsController < ApplicationController
     def set_group
       @group = Group.find(params[:id])
     end
-    #def set_current_user
-     # user = current_user
-    #end
+    def set_current_user
+     @user = current_user
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:user_id, :name, :describ)
+      params.require(:group).permit(:user_id, :name, :describe)
     end
 end

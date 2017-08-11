@@ -38,8 +38,12 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
+        <% if post.user.profile.name == nil%>
+        <td><%= post.user.email %></td>
+        <% else %>
         <td><%= post.user.profile.name %></td>
         <!--之後希望可以把user name 寫成可以直接連到對方的個人頁面去, 化又說回來 個人主要要面想要有什？-->
+        <% end %>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= post.created_at%><td>
@@ -55,4 +59,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path(@group.id) %>
+<%= link_to 'New Post', new_post_path(@group) %>
