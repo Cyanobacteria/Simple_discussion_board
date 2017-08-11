@@ -16,7 +16,7 @@
       <% if current_user && current_user == @post.user%>
         <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-default pull-right" %>
       <% end %>
-        <%= link_to 'Back', posts_path, class: "btn btn-default pull-right" %>
+        <%= link_to 'Back', group_path(@group), class: "btn btn-default pull-right" %>
     </p>
     <hr>
 

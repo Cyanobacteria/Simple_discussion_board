@@ -19,19 +19,19 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     #用來在post的show頁面直接新增discussion
-    @discussion = Discussion.new 
+    @discussion = Discussion.new
+    @group = @post.group
   end
 
   # GET /posts/new
   def new
     @post = Post.new
     @group = Group.find(params[:format])
-    puts "______"
-    puts params
   end
 
   # GET /posts/1/edit
   def edit
+    @group = @post.group
   end
 
   # POST /posts
@@ -58,23 +58,27 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
+    #respond_to do |format|
+      @group = @post.group
+      
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+       redirect_to group_path(@group.id)
+       # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+       # format.json { render :show, status: :ok, location: @post }
       else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+       # format.html { render :edit }
+       # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
-    end
+   # end
   end
 
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
     @post.destroy
+      @group = @post.group
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to group_path(@group.id), notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,10 +93,6 @@ class PostsController < ApplicationController
       
      a = @discussions = @post.discussions.all 
      a.each do |aa|
-       #aa.each do |bb|
-        puts "黑嘿嘿" 
-        puts aa
-       #end 
      end
       #要寫一個面對空值時候的判斷
 #     puts @discussions[0].content
