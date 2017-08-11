@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :set_current_user
+  before_action :is_current_user?, :only => [:edit, :update, :destroy]
 
   # GET /groups
   # GET /groups.json
@@ -89,6 +90,11 @@ class GroupsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_group
       @group = Group.find(params[:id])
+    end
+    def is_current_user?      
+      if current_user != @group.user
+        redirect_to groups_path
+      end
     end
     def set_current_user
      @user = current_user
