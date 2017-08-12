@@ -84,7 +84,8 @@
       </h4> 
       <%= discussion.content %>
       <% if current_user && current_user == discussion.user%>
-        <%= link_to("Edit", edit_post_discussion_path(discussion), class: "btn btn-default pull-right")%>
+        <!-- 如果是nest的話這樣寫是正確的不然路徑會錯誤  -->
+        <%= link_to("Edit", edit_post_discussion_path(@post , discussion), class: "btn btn-default pull-right")%>
       <% end %>
     </div>
   </div>

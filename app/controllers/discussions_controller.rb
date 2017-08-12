@@ -31,13 +31,14 @@ class DiscussionsController < ApplicationController
     #這個部份未解決需要補齊
     @discussion.post = @post
     @discussion.user_id = current_user.id
+    respond_to do |format|
       if @discussion.save
         format.html { redirect_to post_path(@post), notice: 'Discussion was successfully updated.' }
         format.json { render :show, status: :ok, location: @discussion }
       else
         format.html { redirect_to post_path(@post) }
         format.json { render json: @discussion.errors, status: :unprocessable_entity }
-      
+      end      
     end
   end
 
