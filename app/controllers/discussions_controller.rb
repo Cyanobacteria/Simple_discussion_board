@@ -2,7 +2,7 @@ class DiscussionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
   before_action :is_current_user?, :only => [:edit, :update, :destroy]
-  before_action :set_post, :only => [:new, :edit, :create, :update, :destroy] 
+  before_action :set_post, :only => [:create, :update, :destroy] 
   # GET /discussions
   # GET /discussions.json
   def index
@@ -31,14 +31,13 @@ class DiscussionsController < ApplicationController
     #這個部份未解決需要補齊
     @discussion.post = @post
     @discussion.user_id = current_user.id
-    respond_to do |format|
       if @discussion.save
-        format.html { redirect_to post_path(@post), notice: 'Discussion was successfully created.' }
-        format.json { render :show, status: :created, location: @discussion }
+        format.html { redirect_to post_path(@post), notice: 'Discussion was successfully updated.' }
+        format.json { render :show, status: :ok, location: @discussion }
       else
-        format.html { render :new }
+        format.html { redirect_to post_path(@post) }
         format.json { render json: @discussion.errors, status: :unprocessable_entity }
-      end
+      
     end
   end
 

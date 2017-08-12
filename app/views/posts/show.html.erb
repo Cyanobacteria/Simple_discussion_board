@@ -36,9 +36,7 @@
 <!--發布discuss的輸入框-->
 <div class="well">
   <h4>Leave a Comment:</h4>
-  <%= simple_form_for [@post,@discussion], :url => post_discussions_path(@post) do |f| %>
-   <!--  post_discussions_path(@post)  略懂略懂 還是不是很明白但是大概會操作
-         必須在helper跟form多下功夫  -->
+  <%= simple_form_for [@discussion], :url => post_discussions_path(@post) do |f| %>
     <form role="form">
       <div class="form-group">
         <%= f.text_area :content, :class => "form-control", :rows => "3" %>
@@ -86,7 +84,7 @@
       </h4> 
       <%= discussion.content %>
       <% if current_user && current_user == discussion.user%>
-        <%= link_to("Edit", edit_post_discussion_path(@post, discussion), class: "btn btn-default pull-right")%>
+        <%= link_to("Edit", edit_post_discussion_path(discussion), class: "btn btn-default pull-right")%>
       <% end %>
     </div>
   </div>

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :profiles, :except => [:index, :new, :create, :destroy]
   
   resources :posts, :except => [:index] do
-    resources :discussions, :except => [:index, :new ]
+    resources :discussions, :except => [:index, :new, :show ]
   end
   root 'groups#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
