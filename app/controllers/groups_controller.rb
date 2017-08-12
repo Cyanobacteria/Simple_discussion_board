@@ -17,8 +17,6 @@ class GroupsController < ApplicationController
 #又不是group 跟 post多對多 
 
     @posts = @group.posts.each.reverse_each
-#   @posts = Post
-   # @posts = @group.members.each.reverse_each
     if current_user.profile == nil
       user = current_user
       Profile.create(:user_id => user.id, :name => user.email, :age => nil, :location => nil, :gender => nil)
@@ -38,8 +36,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-      #user = current_user
-    @group.user_id = @user.id 
+    @group.user = @user
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
@@ -57,7 +54,8 @@ class GroupsController < ApplicationController
     respond_to do |format|
 
     #確定編輯後的id一定是編輯者本人
-    @group.user_id = current_user.id
+    @group.user = @user
+    #@group.user_id = current_user.id
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
