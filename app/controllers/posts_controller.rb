@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   #順序不能反喔 跟private裡面的結構有關係 
   before_action :authenticate_user!
+  before_action :set_group, only: [:new, :create]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :is_current_user?, :only => [:edit, :update, :destroy]
   before_action :find_discussions_belongs_to_post, :only => [:show]
@@ -26,7 +27,6 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    @group = Group.find(params[:format])
   end
 
   # GET /posts/1/edit
@@ -37,11 +37,10 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @group = Group.find(params[:format])
     @post = Post.new(post_params)
     #設定為user_id只能是創立者的不能自己設定
-    @post.user_id = current_user.id
-    @post.group_id = @group.id    
+    @post.user = current_user
+    @post.group = @group   
     #respond_to do |format|
       
       if @post.save
@@ -62,7 +61,7 @@ class PostsController < ApplicationController
       @group = @post.group
       
       if @post.update(post_params)
-       redirect_to group_path(@group.id)
+       redirect_to group_path(@group)
        # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
        # format.json { render :show, status: :ok, location: @post }
       else
@@ -85,6 +84,9 @@ class PostsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_group 
+      @group = Group.find(params[:format])
+    end
     def set_post
       @post = Post.find(params[:id])
     end
