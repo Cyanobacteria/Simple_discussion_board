@@ -52,10 +52,8 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1.json
   def update
     respond_to do |format|
-
     #確定編輯後的id一定是編輯者本人
     @group.user = @user
-    #@group.user_id = current_user.id
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
@@ -86,19 +84,25 @@ class GroupsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_group
       @group = Group.find(params[:id])
     end
+
     def is_current_user?      
       if current_user != @group.user
         redirect_to groups_path
       end
     end
+
     def set_current_user
      @user = current_user
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
+
     def group_params
       params.require(:group).permit(:user_id, :name, :describe)
     end
+
 end
