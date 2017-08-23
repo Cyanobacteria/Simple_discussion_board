@@ -20,3 +20,5 @@ discussion
 
 初步的把 discussions posts groups三個controller的程式碼簡化
 view的部份也重先瀏覽並整理過，下一個目標是把邏輯整理成helper
+
+profile的更新功能完成了,但是邏輯上有些漏洞要修好 id and userid的關係要注意
