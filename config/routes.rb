@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users 
+
   resources :groups do
     member do
       post :join
@@ -7,7 +8,11 @@ Rails.application.routes.draw do
     end 
   end
                     
-  resources :profiles, :except => [:index, :new, :create, :destroy]
+  resources :profiles, :except => [:index, :new, :create, :destroy] do
+    member do
+      
+    end
+  end
   
   resources :posts, :except => [:index] do
     resources :discussions, :except => [:index, :new, :show ]
