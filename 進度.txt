@@ -15,3 +15,8 @@ discussion
 嘗試使用TDD
 重頭寫一次一樣的東西
 
+
+2017 08 23
+
+初步的把 discussions posts groups三個controller的程式碼簡化
+view的部份也重先瀏覽並整理過，下一個目標是把邏輯整理成helper

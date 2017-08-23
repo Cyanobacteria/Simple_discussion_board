@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :set_group, only: [:new, :create]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :is_current_user?, :only => [:edit, :update, :destroy]
-  before_action :find_discussions_belongs_to_post, :only => [:show]
+  #before_action :find_discussions_belongs_to_post, :only => [:show]
 
   # GET /posts
   # GET /posts.json
@@ -19,9 +19,12 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+   
+    @discussions = @post.discussions.all 
     #用來在post的show頁面直接新增discussion
     @discussion = Discussion.new
     @group = @post.group
+ 
   end
 
   # GET /posts/new
@@ -84,21 +87,17 @@ class PostsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    
     def set_group 
       @group = Group.find(params[:format])
     end
+    
     def set_post
       @post = Post.find(params[:id])
     end
     
-    def find_discussions_belongs_to_post    
-      
-     a = @discussions = @post.discussions.all 
-     a.each do |aa|
-     end
-      #要寫一個面對空值時候的判斷
-#     puts @discussions[0].content
- #    puts "dffadsf"
+    def find_discussions_belongs_to_post      
+      @discussions = @post.discussions.all 
     end
 
     def is_current_user?      

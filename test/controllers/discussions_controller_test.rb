@@ -6,6 +6,7 @@ class DiscussionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit page" do
+
     get edit_post_discussion_path(id: "1", post_id: "1")
     assert_response :success 
     
