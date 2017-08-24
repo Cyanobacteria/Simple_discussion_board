@@ -22,7 +22,7 @@
         <%= puts request.path %>
         <%= puts "國國國"%>
         <ul class="dropdown-menu">
-          <li><a href="#">users</a></li>
+          <li><a href="<%= profiles_path %>">users</a></li>
           <li><a href="/profiles/<%= current_user.profile.id %>">My Profile</a></li>
           <li><a href="#">Page 1-3</a></li>
         </ul>

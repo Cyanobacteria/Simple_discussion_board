@@ -22,9 +22,11 @@
         <td><%= profile.age %></td>
         <td><%= profile.location %></td>
         <td><%= profile.gender %></td>
+        <% if current_user && current_user == profile.user %>
         <td><%= link_to 'Show', profile %></td>
         <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%# link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +34,5 @@
 
 <br>
 
-<%= link_to 'New Profile', new_profile_path %>
+<%# link_to 'New Profile', new_profile_path %>
+<%= link_to 'back', groups_path %>

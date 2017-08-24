@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end 
   end
                     
-  resources :profiles, :except => [:index, :new, :create, :destroy] do
+  resources :profiles, :except => [:new, :create, :destroy] do
     member do
       
     end
