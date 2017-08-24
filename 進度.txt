@@ -22,3 +22,7 @@ discussion
 view的部份也重先瀏覽並整理過，下一個目標是把邏輯整理成helper
 
 profile的更新功能完成了,但是邏輯上有些漏洞要修好 id and userid的關係要注意
+
+試著自己幹routes 跟 包裝params?
+然後把東西都整理到helper去看看？
+在試試看寫些js
