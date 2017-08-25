@@ -1,0 +1,21 @@
+
+<table class="table">
+  <tr>
+    <th>屬於</th>
+    <th>名稱</th>
+    <th>描述</th>
+    <th>編輯</th>
+    <th>刪除</th>
+  </tr>
+  <% @groups.each do |group| %>
+    <tr>
+     <th><%= group.user.profile.name %></th>
+     <th><a href="<%= group_path(group) %>"><%= group.name %></a></th>
+     <th><%= group.describe %></th>
+     <th></th>
+     <th></th>
+    </tr>
+  <% end %>
+</table>
+
+

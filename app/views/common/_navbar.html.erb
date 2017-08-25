@@ -5,12 +5,12 @@
     <div class="navbar-header">
   <!--這邊有問題要修 -->
      <% if current_user.profile == nil %>
-       <a class="navbar-brand" href="#"><%= current_user.email%></a>
+       <a class="navbar-brand" href="<%= mygroups_path%>"><%= current_user.email%></a>
      <% else %>
        <% if current_user.profile.name != nil%>
-         <a class="navbar-brand" href="#"><%= current_user.profile.name%></a>
+         <a class="navbar-brand" href="<%= mygroups_path %>"><%= current_user.profile.name%></a>
        <% else %>
-         <a class="navbar-brand" href="#"><%= current_user.email%></a>
+         <a class="navbar-brand" href="<%= mygroups_path %>"><%= current_user.email%></a>
        <%end%>
      <% end %>
   <!-- end-->

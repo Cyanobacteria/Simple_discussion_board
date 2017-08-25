@@ -5,9 +5,14 @@ Rails.application.routes.draw do
     member do
       post :join
       post :quit
+     # get :show_by_user
     end 
   end
-                    
+
+
+  get '/mygroups', to: 'groups#show_by_user', as: 'mygroups'
+
+             
   resources :profiles, :except => [:new, :create, :destroy] do
     member do
       
