@@ -48,7 +48,7 @@
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= post.created_at%><td>
-        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Show', post_path(id: post.id, group: @group.id) %></td>
         <% if current_user && current_user.id == post.user.id %>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>
           <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -60,4 +60,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path(@group) %>
+<%= link_to 'New Post', new_post_path(:group => @group.id) %>

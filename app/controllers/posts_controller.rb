@@ -89,7 +89,7 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     
     def set_group 
-      @group = Group.find(params[:format])
+      @group = Group.find(params[:group])
     end
     
     def set_post

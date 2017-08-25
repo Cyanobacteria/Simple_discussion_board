@@ -1,4 +1,4 @@
-<%= simple_form_for [@group,@post], :url => posts_path(@group, @post) do |f| %>
+<%= simple_form_for [@group, @post], :url => posts_path(group: @group) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
