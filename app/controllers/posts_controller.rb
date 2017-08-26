@@ -90,6 +90,7 @@ class PostsController < ApplicationController
     
     def set_group 
       @group = Group.find(params[:group])
+      
     end
     
     def set_post
