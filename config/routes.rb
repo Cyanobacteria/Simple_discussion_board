@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get '/publicgroups', to: 'public#groups', as: 'publicgroups'
   get '/publicgroups/:id', to: 'public#group',  as: "publicgroup"
+  get '/publicgroups/:id/publicpost/:post_id', to: 'public#post', as: "publicpost"
 #_____
 
 
