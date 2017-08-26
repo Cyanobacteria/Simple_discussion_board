@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users 
 #_____public
 
-  get '/publicgroups', to: 'public#groups'
-
+  get '/publicgroups', to: 'public#groups', as: 'publicgroups'
+  get '/publicgroups/:id', to: 'public#group',  as: "publicgroup"
 #_____
 
 

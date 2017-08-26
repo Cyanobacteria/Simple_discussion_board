@@ -2,7 +2,7 @@
 
     <% @groups.each do |group| %>
       <tr>
-      <td><%= group.name %></td>
+      <td><a href="<%= publicgroup_path(group) %>"><%= group.name %></a></td>
       <td><%= group.describe %></td>
       <td><%= group.user.email %></td>
       </tr>
