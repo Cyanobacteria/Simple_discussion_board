@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users 
+#_____public
+
+  get '/publicgroups', to: 'public#groups'
+
+#_____
+
+
+
+
 
   resources :groups do
     member do

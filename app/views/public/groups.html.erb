@@ -1,0 +1,16 @@
+<table class="table">
+
+    <% @groups.each do |group| %>
+      <tr>
+      <td><%= group.name %></td>
+      <td><%= group.describe %></td>
+      <td><%= group.user.email %></td>
+      </tr>
+    <% end %>
+  
+
+
+
+
+
+</table>
