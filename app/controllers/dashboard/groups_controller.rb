@@ -28,11 +28,15 @@ class Dashboard::GroupsController < Dashboard::DashboardController
   end
 
   def edit
-   
+    @group = Group.find(params[:id]) 
   end
 
   def update
-
+    @group = Group.find(params[:id]) 
+    
+    if @group.update(user_params)
+      redirect_to dashboard_groups_path
+    end
   end
 
   def destroy

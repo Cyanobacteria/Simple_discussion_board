@@ -10,6 +10,7 @@
       <td><%= group.user.profile.name%></td>
       <td><%= group.describe%></td>
       <td><%= group.created_at%></td>
+      <td><a data-method="get" href="<%=edit_dashboard_group_path(group) %>">編輯</a></td>
       <td><a data-method="delete" href="<%=dashboard_group_path(group) %>">刪除</a></td>
 
       <!--data-method 必須在href 前     -->
