@@ -32,8 +32,10 @@ class Dashboard::GroupsController < Dashboard::DashboardController
     
     if @group.destroy
       puts "刪除成功"
+      redirect_to dashboard_groups_path
     end
-  
+    #搞清楚render redirect_to 的用法
+    #手刻的過程 可以熟悉各種細節
   end
 
 end
