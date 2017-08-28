@@ -12,10 +12,18 @@ class Dashboard::GroupsController < Dashboard::DashboardController
   end
 
   def new
+   @group = Group.new
    #表單 新增頁面
+   #自製from
   end
 
   def create
+   @group = Group.new(user_params)
+   @group.user_id = current_user.id
+   if @group.save
+     redirect_to dashboard_groups_path
+     puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+   end
    #新增動作本身
   end
 
@@ -37,5 +45,11 @@ class Dashboard::GroupsController < Dashboard::DashboardController
     #搞清楚render redirect_to 的用法
     #手刻的過程 可以熟悉各種細節
   end
+
+  
+  def user_params
+    params.require(:group).permit(:name, :describe)
+  end
+
 
 end
