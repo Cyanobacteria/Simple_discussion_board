@@ -1,1 +1,27 @@
 <h1>ya!</h1>
+<hr>
+
+<table class="table">
+
+  
+  <% @groups.each do |group|%>
+    <tr>
+      <td><%= group.name%></td>
+      <td><%= group.user.profile.name%></td>
+      <td><%= group.describe%></td>
+      <td><%= group.created_at%></td>
+      <td><a data-method="delete" href="<%=dashboard_group_path(group) %>">刪除</a></td>
+
+      <!--data-method 必須在href 前     -->
+       
+
+      
+
+
+    </tr>
+  <% end %>
+</table>
+
+
+
+<a href="<%= new_dashboard_group_path %>"></a>

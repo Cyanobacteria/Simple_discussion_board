@@ -28,7 +28,12 @@ class Dashboard::GroupsController < Dashboard::DashboardController
   end
 
   def destroy
-
+    @group = Group.find(params[:id])
+    
+    if @group.destroy
+      puts "刪除成功"
+    end
+  
   end
 
 end
