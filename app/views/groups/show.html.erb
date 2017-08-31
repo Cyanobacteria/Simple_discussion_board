@@ -48,10 +48,10 @@
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= post.created_at%><td>
-        <td><%= link_to 'Show', post_path(id: post.id, group: @group.id) %></td>
+        <td><%= link_to 'Show', post_path(id: post.id, group: @group.id), class: "btn btn-primary", style: "color:white" %></td>
         <% if current_user && current_user.id == post.user.id %>
-          <td><%= link_to 'Edit', edit_post_path(post) %></td>
-          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-primary", sytle: "color:white" %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary", style: "color:white" %></td>
         <% end %>
       </tr>
     <% end %>
