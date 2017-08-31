@@ -18,7 +18,8 @@
         <td><%= group.user.email %></td>
         <td><%= group.name %></td>
         <td><%= group.describe %></td>
-        <td><button type="button" class="btn btn-primary"><%= link_to 'Show', group %></button></td>
+        <td><%= link_to 'Show', group, :class => "btn btn-primary white", style: "color:white" %></td>
+        <!-- css寫在application.scss 沒用 寫在style...就可以 搞清楚原因-->
         <% if current_user == group.user %>
         <td><button type="button" class="btn btn-warning"><%= link_to 'Edit', edit_group_path(group) %></button></td>
         <td><button type="button" class="btn btn-danger"><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
