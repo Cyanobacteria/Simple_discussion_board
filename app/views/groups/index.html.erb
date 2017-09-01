@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Groups</h1>
+<h1>討論版</h1>
 
 <table class="table">
   <thead>
@@ -8,22 +8,20 @@
       <th>版主</th>
       <th>名稱</th>
       <th>備註</th>
-      <th colspan="3"></th>
+      <th>最近更新</th>
+      <th>最新文章</th>
     </tr>
   </thead>
 
   <tbody>
     <% @groups.each do |group| %>
       <tr>
-        <td><%= group.user.email %></td>
-        <td><%= group.name %></td>
+        <td><%= group.user.profile.name %></td>
+        <td><%= link_to group.name, group %></td>
         <td><%= group.describe %></td>
-        <td><%= link_to 'Show', group, :class => "btn btn-primary white", style: "color:white" %></td>
         <!-- css寫在application.scss 沒用 寫在style...就可以 搞清楚原因-->
-        <% if current_user == group.user %>
-        <td><button type="button" class="btn btn-warning"><%= link_to 'Edit', edit_group_path(group) %></button></td>
-        <td><button type="button" class="btn btn-danger"><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
-        <% end %>
+      <td>最新文章</td>
+      <td>最新文章</td>
       </tr>
     <% end %>
   </tbody>
