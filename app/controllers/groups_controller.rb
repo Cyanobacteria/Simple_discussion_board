@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def show_by_user
     @groups = Group.where(user_id: current_user.id)
+   
   end
 
   def index

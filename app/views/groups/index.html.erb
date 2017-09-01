@@ -5,23 +5,25 @@
 <table class="table">
   <thead>
     <tr>
-      <th>版主</th>
       <th>名稱</th>
       <th>備註</th>
+      <th>人氣</th>
       <th>最近更新</th>
       <th>最新文章</th>
+      <th>版主</th>
     </tr>
   </thead>
 
   <tbody>
     <% @groups.each do |group| %>
       <tr>
-        <td><%= group.user.profile.name %></td>
         <td><%= link_to group.name, group %></td>
         <td><%= group.describe %></td>
         <!-- css寫在application.scss 沒用 寫在style...就可以 搞清楚原因-->
-      <td>最新文章</td>
-      <td>最新文章</td>
+        <td></td> 
+        <td><%= show_time(group.id) %></td>
+        <td><%= last_update_post_of_group(group.id) %></td>
+        <td><%= group.user.profile.name %></td>
       </tr>
     <% end %>
   </tbody>
