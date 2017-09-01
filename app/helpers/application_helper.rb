@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def last_update_post_of_group(id)
+  def last_updated_post_of_group(id)
     group = Group.find(id).posts
     if group.count == 0
       return "目前沒有文章"
@@ -9,7 +9,7 @@ module ApplicationHelper
     end 
   end
 
-  def show_time(id)
+  def show_time_group(id)
     time = Time.now
     group = Group.find(id).posts
     if group.count == 0
@@ -19,6 +19,14 @@ module ApplicationHelper
       time_updated = "#{group.order('updated_at').last.updated_at}"
       output = time_updated + "(" + time_distance + ")"
       output
+    end 
+  end
+  def last_created_post_of_group(id)
+    group = Group.find(id).posts
+    if group.count == 0
+      return "目前沒有文章"
+    else
+      group.order('created_at').last.title
     end 
   end
   
