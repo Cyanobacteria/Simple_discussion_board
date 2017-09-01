@@ -31,10 +31,12 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
+    @action_name = "建立"
   end
 
   # GET /groups/1/edit
   def edit
+    @action_name = "更新"
   end
 
   # POST /groups
