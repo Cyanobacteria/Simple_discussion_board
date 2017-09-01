@@ -21,7 +21,8 @@
         <td><%= group.describe %></td>
         <!-- css寫在application.scss 沒用 寫在style...就可以 搞清楚原因-->
         <td></td> 
-        <td><%= sort_tool(group.id,"group","updated_at") + " " + sort_tool(group.id,"group","time_distance") %></td>
+        <!-- 會印兩次怎改寫好 -->
+        <td><%= if_no_post(sort_tool(group.id,"group","updated_at") + " (" + sort_tool(group.id,"group","time_distance") + ")") %></td>
         <td><%= sort_tool(group.id,"group","created_at") %></td>
         <td><%= group.user.profile.name %></td>
       </tr>
@@ -31,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Group', new_group_path %>
+<%= link_to '新增討論版', new_group_path %>
