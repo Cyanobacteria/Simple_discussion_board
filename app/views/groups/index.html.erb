@@ -21,8 +21,8 @@
         <td><%= group.describe %></td>
         <!-- css寫在application.scss 沒用 寫在style...就可以 搞清楚原因-->
         <td></td> 
-        <td><%= last_updated_post_of_group(group.id) + " " + show_time_group(group.id) %></td>
-        <td><%= last_created_post_of_group(group.id) %></td>
+        <td><%= sort_tool(group.id,"group","updated_at") + " " + sort_tool(group.id,"group","time_distance") %></td>
+        <td><%= sort_tool(group.id,"group","created_at") %></td>
         <td><%= group.user.profile.name %></td>
       </tr>
     <% end %>
